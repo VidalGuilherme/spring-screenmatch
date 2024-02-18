@@ -16,11 +16,10 @@ public record SerieDto(
 
     @Override
     public String toString() {
-        return "\n Nome: "+title+
-            "\n Ano: "+year+
-            "\n Gêneros: "+genre+
-            "\n Nota: "+rating+
-            "\n Temporadas: "+totalSeasons+
-            "\n";
+        return "\nNome: "+title+
+            "\nAno: "+year+
+            "\nGêneros: "+genre+
+            "\nNota: "+rating+
+            "\nTemporadas: "+totalSeasons;
     }
 }

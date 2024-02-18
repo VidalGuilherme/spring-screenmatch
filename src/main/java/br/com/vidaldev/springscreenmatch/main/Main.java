@@ -3,13 +3,15 @@ package br.com.vidaldev.springscreenmatch.main;
 import br.com.vidaldev.springscreenmatch.dtos.api.EpisodeDto;
 import br.com.vidaldev.springscreenmatch.dtos.api.SeasonDto;
 import br.com.vidaldev.springscreenmatch.dtos.api.SerieDto;
+import br.com.vidaldev.springscreenmatch.enums.TextLanguage;
 import br.com.vidaldev.springscreenmatch.interfaces.IDataConverter;
+import br.com.vidaldev.springscreenmatch.interfaces.ITextTranslater;
 import br.com.vidaldev.springscreenmatch.services.ConsumerApi;
 import br.com.vidaldev.springscreenmatch.services.JacksonDataConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.swing.text.html.Option;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -26,6 +28,9 @@ public class Main {
     private final ConsumerApi consumerApi = new ConsumerApi();
 
     private IDataConverter converter = new JacksonDataConverter();
+
+    @Autowired
+    private ITextTranslater translater;
 
     public void showMenu(){
         try {
@@ -101,6 +106,8 @@ public class Main {
 
             System.out.println("#### RESUMO DA SÉRIE #####");
             System.out.println(serieDto);
+
+            System.out.println("\nResumo: "+translater.translate(serieDto.plot(), TextLanguage.PT_BR));
 
             if(!seasons.isEmpty()) {
                 Optional<Map.Entry<Integer, Double>> bestSeason = ratingSeason.entrySet().stream().max(Comparator.comparing(Map.Entry::getValue));
