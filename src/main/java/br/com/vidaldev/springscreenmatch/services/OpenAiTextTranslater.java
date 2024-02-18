@@ -17,15 +17,15 @@ public class OpenAiTextTranslater implements ITextTranslater {
     public String translate(String text, TextLanguage language) {
         OpenAiService openAiService = new OpenAiService(openAiKey);
         var prompt = "translate the text into "+language.label+": "+text;
-        System.out.println(prompt);
+        //System.out.println(prompt);
         CompletionRequest request = CompletionRequest.builder()
-                .model("babbage-002")
+                .model("gpt-3.5-turbo-instruct")
                 .prompt(prompt)
                 .maxTokens(1000)
                 .temperature(0.7)
                 .build();
 
         var response = openAiService.createCompletion(request);
-        return response.getChoices().getFirst().getText();
+        return response.getChoices().getFirst().getText().trim();
     }
 }

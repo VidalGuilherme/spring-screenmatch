@@ -106,7 +106,6 @@ public class Main {
 
             System.out.println("#### RESUMO DA SÉRIE #####");
             System.out.println(serieDto);
-
             System.out.println("\nResumo: "+translater.translate(serieDto.plot(), TextLanguage.PT_BR));
 
             if(!seasons.isEmpty()) {
